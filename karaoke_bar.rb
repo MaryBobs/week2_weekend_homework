@@ -16,15 +16,25 @@ end
 end
 
 def check_in_guest(customer,room)
-  return room.guests.push(customer)
+  if room.capacity >= 5
+    return "Sorry, this room is full"
+  end
+  room.guests.push(customer)
+  room.capacity += 1
+  charge_room_fee(customer, room)
 end
 
 def check_out_guest(customer, room)
-  return room.guests.delete(customer)
+  room.guests.delete(customer)
+  room.capacity -= 1
 end
 
 def add_song(song, room)
   return room.playlist.push(song)
+end
+
+def charge_room_fee(customer, room)
+  customer.wallet -= room.price
 end
 
 end

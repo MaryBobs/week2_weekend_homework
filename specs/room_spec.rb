@@ -39,16 +39,8 @@ def test_room_has_playlist
   assert_equal(3, @room1.playlist.count)
 end
 
-def test_add_guest_to_room
-  @room1.check_in_guest(@guest1)
-  assert_equal(1, @room1.guests.count)
-end
-
-def test_remove_guest_from_room
-  # @room1.check_in_guest(@guest1)
-  # @room1.check_in_guest(@guest2)
-  @room1.check_out_guest(@guest1)
-  assert_equal(1, @room1.guests.count)
+def test_capacity_starts_at_zero
+  assert_equal(0, @room2.capacity)
 end
 
 end

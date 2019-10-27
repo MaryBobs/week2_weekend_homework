@@ -1,20 +1,14 @@
 class Room
 
-attr_reader :name, :price, :playlist, :guests
+attr_reader :name, :price, :playlist, :guests, :capacity
+attr_writer :capacity
 
 def initialize(name, price, playlist)
   @name = name
   @price = price
   @playlist = playlist
   @guests = []
-end
-
-def check_in_guest(guest)
-  @guests.push(guest)
-end
-
-def check_out_guest(guest)
-  @guests.delete(guest)
+  @capacity = 0
 end
 
 

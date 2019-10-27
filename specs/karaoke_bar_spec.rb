@@ -28,6 +28,7 @@ def setup
 
   @guest1 = Guest.new("Bill", 50, "Eye of the Tiger")
   @guest2 = Guest.new("Ellie", 25, "Born to Run")
+  @guest3 = Guest.new("Fred", 30, "I Want to Break Free")
 
 end
 
@@ -47,6 +48,8 @@ end
 def test_add_guest_to_room
   @bar1.check_in_guest(@guest1, @room1)
   assert_equal(1, @room1.guests.count)
+  assert_equal(1, @room1.capacity)
+  assert_equal(30, @guest1.wallet)
 end
 
 def test_guest_leaves_room
@@ -54,11 +57,30 @@ def test_guest_leaves_room
   @bar1.check_in_guest(@guest2, @room1)
   @bar1.check_out_guest(@guest1, @room1)
   assert_equal(1, @room1.guests.count)
+  assert_equal(1, @room1.capacity)
+end
+
+def test_room_full_no_check_in_possible
+  @room1.capacity = 5
+  assert_equal("Sorry, this room is full", @bar1.check_in_guest(@guest1, @room1))
+end
+
+def test_room_has_space_allow_check_in
+  @room1.capacity = 4
+  @bar1.check_in_guest(@guest1, @room1)
+  assert_equal(5, @room1.capacity)
+end
+
+def test_charge_guest_room_fee
+  @bar1.charge_room_fee(@guest1, @room1)
+  assert_equal(30, @guest1.wallet)
 end
 
 def test_add_song_to_room
   @bar1.add_song(@song5, @room2)
   assert_equal(4, @room2.playlist.count)
 end
+
+
 
 end
