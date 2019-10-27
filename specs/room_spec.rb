@@ -2,6 +2,7 @@ require("minitest/autorun")
 require("minitest/rg")
 require_relative("../room.rb")
 require_relative("../song.rb")
+require_relative("../guest.rb")
 
 class TestRoom < MiniTest::Test
 
@@ -14,17 +15,20 @@ def setup
 
   @songs = [@song1, @song2, @songs3]
 
-  @room1 = Room.new("Twist & Shout", 5, 20, @songs)
-  @room2 = Room.new("Rock Star", 8, 25, @songs)
-  @room3 = Room.new("Glam-O-Rama", 10, 30, @songs)
+  @room1 = Room.new("Twist & Shout", 20, @songs)
+  @room2 = Room.new("Rock Star", 25, @songs)
+  @room3 = Room.new("Glam-O-Rama", 30, @songs)
+
+  @guest1 = Guest.new("Bill", 50, "Eye of the Tiger")
+  @guest2 = Guest.new("Ellie", 25, "Born to Run")
 end
 
 def test_room_has_name
   assert_equal("Rock Star", @room2.name)
 end
 
-def test_room_has_capacity
-  assert_equal(10, @room3.capacity)
+def test_room_is_empty
+  assert_equal(0, @room3.guests.count)
 end
 
 def test_room_has_price
@@ -33,6 +37,18 @@ end
 
 def test_room_has_playlist
   assert_equal(3, @room1.playlist.count)
+end
+
+def test_add_guest_to_room
+  @room1.check_in_guest(@guest1)
+  assert_equal(1, @room1.guests.count)
+end
+
+def test_remove_guest_from_room
+  # @room1.check_in_guest(@guest1)
+  # @room1.check_in_guest(@guest2)
+  @room1.check_out_guest(@guest1)
+  assert_equal(1, @room1.guests.count)
 end
 
 end
