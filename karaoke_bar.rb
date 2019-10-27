@@ -8,8 +8,8 @@ def initialize(name, rooms)
 end
 
 def room_name(room)
-  for x in @rooms
-    if x == room
+  for room in @rooms
+    if room == room
   return room.name
 end
 end
