@@ -21,7 +21,8 @@ def check_in_guest(customer,room)
   end
   room.guests.push(customer)
   room.capacity += 1
-  charge_room_fee(customer, room)
+  customer.pay_for_room(customer, room)
+  # charge_room_fee(customer, room)
 end
 
 def check_out_guest(customer, room)

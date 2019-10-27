@@ -71,16 +71,10 @@ def test_room_has_space_allow_check_in
   assert_equal(5, @room1.capacity)
 end
 
-def test_charge_guest_room_fee
-  @bar1.charge_room_fee(@guest1, @room1)
-  assert_equal(30, @guest1.wallet)
-end
-
 def test_add_song_to_room
   @bar1.add_song(@song5, @room2)
   assert_equal(4, @room2.playlist.count)
 end
-
 
 
 end

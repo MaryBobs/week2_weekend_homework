@@ -9,11 +9,8 @@ def initialize(name,wallet, favourite_song)
   @fav_song = favourite_song
 end
 
-
-
-
-
-
-
+def pay_for_room(customer, room)
+  customer.wallet -= room.price
+end
 
 end
