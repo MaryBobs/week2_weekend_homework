@@ -22,7 +22,6 @@ def check_in_guest(customer,room)
   room.guests.push(customer)
   room.capacity += 1
   customer.pay_for_room(customer, room)
-  # charge_room_fee(customer, room)
 end
 
 def check_out_guest(customer, room)
@@ -34,8 +33,17 @@ def add_song(song, room)
   return room.playlist.push(song)
 end
 
-def charge_room_fee(customer, room)
-  customer.wallet -= room.price
+def guest_song_available(customer, room)
+  for song in room.playlist
+    if song.title == customer.fav_song
+      return "Whoo!"
+    end
+  end
+  return "Maybe next time"
 end
+
+
+
+
 
 end

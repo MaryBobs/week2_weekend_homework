@@ -26,7 +26,7 @@ def setup
 
   @bar1 = KaraokeBar.new("Rock Stars", @rooms)
 
-  @guest1 = Guest.new("Bill", 50, "Eye of the Tiger")
+  @guest1 = Guest.new("Bill", 50, "Eye Of The Tiger")
   @guest2 = Guest.new("Ellie", 25, "Born to Run")
   @guest3 = Guest.new("Fred", 30, "I Want to Break Free")
 
@@ -76,5 +76,12 @@ def test_add_song_to_room
   assert_equal(4, @room2.playlist.count)
 end
 
+def test_guest_fav_song__in_room
+  assert_equal("Whoo!", @bar1.guest_song_available(@guest1, @room1))
+end
+
+def test_guest_fav_song__not_in_room
+  assert_equal("Maybe next time", @bar1.guest_song_available(@guest2, @room1))
+end
 
 end
